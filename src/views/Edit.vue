@@ -81,14 +81,15 @@ export default {
     updateList () {
       const noteCopy = {
         title: this.noteTitle,
-        tasks: this.noteTasks
+        tasks: []
       }
-      this.note = noteCopy
-      this.note.tasks = noteCopy.tasks.filter(item => {
+      noteCopy.tasks = this.noteTasks.filter(item => {
+        item.task = item.task.trim()
         if (item.task.trim() !== '') {
-          return item
+          return Object.assign({}, item)
         }
-      }).slice()
+      })
+      this.note = noteCopy
     },
     addTask () {
       this.noteTasks.push({
