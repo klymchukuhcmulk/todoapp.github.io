@@ -2,7 +2,7 @@
     <div id="list">
       <div class="notesDiv">
         <div class="noteDiv" :class="{ odd : notes.length % 2}" v-for="(note, i) in notes" :key="i">
-          <h1> {{ note.title }} </h1>
+          <h1>{{ note.title }}</h1>
           <div>
             <div class="taskDiv" v-for="(item, j) in note.tasks" :key="j">
               <svg v-if="item.done" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -93,8 +93,10 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   h1 {
+    text-overflow: ellipsis;
+    overflow: hidden;
     text-align: center;
-    margin: 0;
+    margin: 0 20px;
   }
   .taskDiv {
     background-color: $taskBackground;
@@ -103,6 +105,8 @@ export default {
     margin: 10px 20px;
     display: flex;
     p {
+      text-overflow: ellipsis;
+      overflow: hidden;
       font-size: 18px;
       font-weight: bold;
       margin: 2px auto 4px 10px;

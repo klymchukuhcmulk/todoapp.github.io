@@ -1,7 +1,7 @@
 <template>
   <div id="edit">
     <div class="taskEdit">
-      <input class="title" type="text" v-model="noteCopy.title">
+      <input class="title" maxlength="30" type="text" v-model="noteCopy.title">
       <div class="task" v-for="(item, i) in noteCopy.tasks" :key="i">
         <label class="checkbox">
           <svg v-if="item.done" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -104,7 +104,7 @@ input {
 #edit {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 40%;
   margin: 50px auto;
   transition: ease all .5s;
 }
@@ -122,7 +122,7 @@ input {
 }
 .title {
   display: block;
-  width: 50%;
+  width: 100%;
   border: none;
   //border-bottom: 1px solid $color;
   margin: 0px auto 60px auto;
@@ -220,6 +220,15 @@ button {
 @media only screen and (max-width: 800px) {
   #edit {
     width: 90%;
+  }
+}
+@media only screen and ( max-width: 500px ) {
+  .title {
+    width: 100%;
+    font-size: 17px;
+  }
+  .taskEdit {
+    padding: 20px 20px 80px 20px;
   }
 }
 </style>

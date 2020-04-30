@@ -30,7 +30,7 @@ export default {
 }
 .back {
   z-index: 1001;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   top: 0;
   right: 0;
@@ -39,7 +39,7 @@ export default {
   opacity: 0.7;
 }
 .window-wrap {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   top: 25%;
   right: 0;
@@ -69,6 +69,13 @@ export default {
           margin: 10px;
         }
       }
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  .window-wrap {
+    .window {
+      width: 80%;
     }
   }
 }
