@@ -12,7 +12,15 @@
 </template>
 
 <script>
-export default {}
+export default {
+  created () {
+    if (localStorage.notes) {
+      const str = localStorage.notes
+      console.log(localStorage)
+      this.$store.dispatch('addNotes', JSON.parse(str))
+    }
+  }
+}
 </script>
 
 <style lang="scss">
