@@ -12,7 +12,7 @@
           </svg>
           <input type="checkbox" v-model="item.done">
         </label>
-        <input class="taskText" type="text" maxlength="50" v-model="item.task" :placeholder="item.task">
+        <input class="taskText" type="text" maxlength="30" v-model="item.task" :placeholder="item.task">
       </div>
       <button class="addTask" @click="addTask">Add task</button>
     </div>
@@ -69,7 +69,12 @@ export default {
     if (!this.note) {
       this.$router.push('/')
     } else {
-      this.noteCopy = this.note
+      this.noteCopy = {}
+      this.noteCopy.title = this.note.title
+      this.noteCopy.tasks = []
+      this.note.tasks.forEach((item, i) => {
+        this.noteCopy.tasks[i] = Object.assign({}, item)
+      })
     }
   },
   methods: {
@@ -208,6 +213,7 @@ button {
     margin: 10px 0;
     height: 20px;
     font-size: large;
+    border-radius: 0;
   }
 }
 .taskText {
