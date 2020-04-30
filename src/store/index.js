@@ -9,7 +9,7 @@ const updateStorage = (notes) => {
 
 export default new Vuex.Store({
   state: {
-    notes: null
+    notes: []
   },
   mutations: {
     addNote (state, payload) {
