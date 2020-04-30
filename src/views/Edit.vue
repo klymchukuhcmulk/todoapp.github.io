@@ -1,8 +1,8 @@
 <template>
   <div id="edit">
     <div class="taskEdit">
-      <input class="title" maxlength="30" type="text" v-model="noteCopy.title">
-      <div class="task" v-for="(item, i) in noteCopy.tasks" :key="i">
+      <input class="title" maxlength="30" type="text" v-model="noteTitle">
+      <div class="task" v-for="(item, i) in noteTasks" :key="i">
         <label class="checkbox">
           <svg v-if="item.done" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
             <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 16.518l-4.5-4.319 1.396-1.435 3.078 2.937 6.105-6.218 1.421 1.409-7.5 7.626z"/>
@@ -34,7 +34,8 @@ export default {
   },
   data () {
     return {
-      noteCopy: null,
+      noteTitle: '',
+      noteTasks: [],
       alertWindow: false
     }
   },
@@ -69,25 +70,28 @@ export default {
     if (!this.note) {
       this.$router.push('/')
     } else {
-      this.noteCopy = {}
-      this.noteCopy.title = this.note.title
-      this.noteCopy.tasks = []
-      this.note.tasks.forEach((item, i) => {
-        this.noteCopy.tasks[i] = Object.assign({}, item)
+      this.noteTitle = this.note.title
+      this.noteTasks = []
+      this.note.tasks.forEach(item => {
+        this.noteTasks.push(Object.assign({}, item))
       })
     }
   },
   methods: {
     updateList () {
-      this.note = this.noteCopy
-      this.note.tasks = this.noteCopy.tasks.filter(item => {
+      const noteCopy = {
+        title: this.noteTitle,
+        tasks: this.noteTasks
+      }
+      this.note = noteCopy
+      this.note.tasks = noteCopy.tasks.filter(item => {
         if (item.task.trim() !== '') {
           return item
         }
-      })
+      }).slice()
     },
     addTask () {
-      this.noteCopy.tasks.push({
+      this.noteTasks.push({
         task: '',
         done: false
       })
@@ -232,6 +236,7 @@ button {
   .title {
     width: 100%;
     font-size: 17px;
+    text-align: left;
   }
   .taskEdit {
     padding: 20px 20px 80px 20px;
